@@ -1,18 +1,17 @@
+import os
+from dotenv import load_dotenv
 import openai
 from flask import Flask, render_template
 
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
+ORG_KEY = os.getenv("ORG_KEY")
+
 API_KEY = "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"
 
-openai.organization = "org-RjKf2up3fnL1E2nOJzXhPgRZ"
+openai.organization = ORG_KEY
 openai.api_key = API_KEY
-
-
-
-
-
-
-
-
 
 
 def singleRecipe():
@@ -26,22 +25,21 @@ def singleRecipe():
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-        {"role": "system", "content": "Give me a recipe that has around " + protein + " grams of protein, " + carb + " grams of carbohydrate, " + fat + " grams of fat and has " + calories + " calories. Along with that include this information: " + otherInfo}
-    ]
+            {"role": "system", "content": "Give me a recipe that has around " + protein + " grams of protein, " + carb + " grams of carbohydrate, " +
+                fat + " grams of fat and has " + calories + " calories. Along with that include this information: " + otherInfo}
+        ]
     )
 
     print(completion.choices[0].message)
     return 0
 
-app = Flask(__name__)
+# added in the static_folder to allow for the css to be used
+app = Flask(__name__, static_folder='templates/assets')
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
-if __name__== "__main__":
+
+if __name__ == "__main__":
     app.run()
-
-
-
-
