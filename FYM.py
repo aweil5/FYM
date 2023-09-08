@@ -8,12 +8,11 @@ load_dotenv()
 API_KEY = os.getenv("API_KEY")
 ORG_KEY = os.getenv("ORG_KEY")
 
-API_KEY = "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"
 
 openai.organization = ORG_KEY
 openai.api_key = API_KEY
 
-
+# DOING FULL BACKEND LATER, CREATE MORE INTRICATE PROMPT
 def singleRecipe():
     protein = "50"
     carb = "60"
