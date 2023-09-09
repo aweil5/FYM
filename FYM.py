@@ -4,28 +4,6 @@ import openai
 from flask import Flask, render_template, request
 
 
-
-# DOING FULL BACKEND LATER, CREATE MORE INTRICATE PROMPT ALSO HAVE GPT PRODUCE OUTPUT THAT IS CONSISTENT IN NATURE SO I CAN MAKE IT LOOK NICE ON WEBSITE WHEN DISPLAYED
-def singleRecipe():
-
-    protein = "50"
-    carb = "60"
-    fat = "20"
-    calories = "600"
-
-    otherInfo = "I want vegetables and I want rice in the meal"
-
-    completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "Give me a recipe that has around " + protein + " grams of protein, " + carb + " grams of carbohydrate, " +
-                fat + " grams of fat and has " + calories + " calories. Along with that include this information: " + otherInfo}
-        ]
-    )
-
-    print(completion.choices[0].message)
-    return 0
-
 # added in the static_folder to allow for the css to be used
 app = Flask(__name__, static_folder='templates/assets')
 
