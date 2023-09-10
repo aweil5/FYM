@@ -32,7 +32,7 @@ def recipeGeneration():
         model="gpt-4",
         messages=[
             {"role": "system", "content": "Give me a recipe that has around " + protein + " grams of protein, " + carb + " grams of carbohydrate, " +
-                fat + " grams of fat and has " + calorie + " calories. Along with that include this information: " + otherInfo + " For the Response please first calculate and list the macronutrients and calorie count, then the list of ingredents followed by 3 lines and then  the cooking instructions"}
+                fat + " grams of fat and has " + calorie + " calories. Along with that include this information: " + otherInfo + " For the Response please first calculate and list the macronutrients and calorie count. After that make 2 new lines then  list of ingredents followed by 3  new lines and then  the cooking instructions."}
         ]
     )
     print("Done with AI call")
