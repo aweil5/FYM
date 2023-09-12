@@ -41,6 +41,37 @@ def recipeGeneration():
     print(recipe)
     return str(recipe)
 
+@app.route('/recipeGenerationFullDay', methods=['POST'])
+def recipeGenerationFullDay():
+    protein = request.form.get('protein')
+    carb = request.form.get('carb')
+    fat = request.form.get('fat')
+    calorie = request.form.get('calorie')
+    otherInfo = request.form.get('otherInfo')
+    
+    load_dotenv()
+
+    API_KEY = os.getenv("OPENAI_API_KEY")
+    ORG_KEY = os.getenv("ORG_KEY")
+
+    openai.organization = ORG_KEY
+    openai.api_key = API_KEY
+
+    prompt = "For the response I would like a full day of eating that satisfies the given information. In the full day I want there to be " + protein + " grams of protein"
+    print("Running AI")
+    completion = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "Give me a recipe that has around " + protein + " grams of protein, " + carb + " grams of carbohydrate, " +
+                fat + " grams of fat and has " + calorie + " calories. Along with that include this information: " + otherInfo + " For the Response please first calculate and list the macronutrients and calorie count. After that make 2 new lines then  list of ingredents followed by 3  new lines and then  the cooking instructions."}
+        ]
+    )
+    print("Done with AI call")
+    
+    recipe = completion.choices[0].message.content
+    print(recipe)
+    return str(recipe)
+
 if __name__ == "__main__":
     app.run()
 
