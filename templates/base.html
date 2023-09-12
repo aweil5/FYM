@@ -163,7 +163,7 @@
             </div>
 
             <button onclick="sendDataFullMeal()" class="btn btn-primary btn-lg btn-block">Generate Day Plan</button>
-            
+
             <h3 id="loadingRecipefullday"></h3>
             <div class="section-title">
               <h2 id = "recipeHeadfullday"></h2>
@@ -350,9 +350,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script type=text/javascript>
-    let protein = document.getElementById("protein").value;
-    $(function() { $("#mybutton").click(function (event) { $.getJSON('/recipeGeneration', { },
-    function(data) { }); return false; }); }); 
+
     
     function sendData() {
             var protein = document.getElementById('protein').value;
@@ -380,34 +378,37 @@
                 }
             });
         }
-        function sendDataFullMeal() {
-            var protein = document.getElementById('proteinfullday').value;
-            var carb = document.getElementById('carbfullday').value;
-            var fat = document.getElementById('fatfullday').value;
-            var calorie = document.getElementById('caloriefullday').value;
-            var otherInfo = document.getElementById('otherInfofullday').value;
-
-            document.getElementById('loadingfullday').innerHTML = "Loading Recipe Now";
-
-
-
-
-            $.ajax({
-                url: '/recipeGenerationFullDay',
-                type: 'POST',
-                data: { 'protein': protein, 'carb': carb, 'fat': fat, 'calorie': calorie, 'otherInfo': otherInfo},
-                success: function(response) {
-                    document.getElementById('loadingfullday').innerHTML = "";
-                    document.getElementById("recipeHeadfullday").innerHTML = "Recipe: "
-                    document.getElementById('outputfullday').innerHTML = response;
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
     
     </script> 
+    <script type = text/javascript>
+
+    function sendDataFullMeal() {
+      var protein = document.getElementById('proteinfullday').value;
+      var carb = document.getElementById('carbfullday').value;
+      var fat = document.getElementById('fatfullday').value;
+      var calorie = document.getElementById('caloriefullday').value;
+      var otherInfo = document.getElementById('otherInfofullday').value;
+
+      document.getElementById('loadingRecipefullday').innerHTML = "Loading Recipe Now";
+
+
+
+
+      $.ajax({
+          url: '/recipeGenerationFullDay',
+          type: 'POST',
+          data: { 'protein': protein, 'carb': carb, 'fat': fat, 'calorie': calorie, 'otherInfo': otherInfo},
+          success: function(response) {
+              document.getElementById('loadingRecipefullday').innerHTML = "";
+              document.getElementById("recipeHeadfullday").innerHTML = "Recipe: "
+              document.getElementById('outputfullday').innerHTML = response;
+          },
+          error: function(error) {
+              console.log(error);
+          }
+      });
+      }
+    </script>
 
 
 </body>
