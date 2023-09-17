@@ -1,0 +1,13 @@
+{
+    "builds":[{
+        "src":"api/FYM.py",
+        "use":"@vercel/python"
+    }
+    ],
+    "routes":[
+        {
+            "src":"/(.*)",
+            "dest":"api/FYM.py"
+        }
+    ]
+}
