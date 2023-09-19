@@ -123,7 +123,7 @@
         </div>
 
       </div>
-    </section><!-- End About Section -->
+    </section><!-- End single recipe Section -->
     <!-- ======= Full Day Section ======= -->
     <section id="resume" class="about">
       <div class="container">
@@ -351,9 +351,11 @@
                 type: 'POST',
                 data: { 'protein': protein, 'carb': carb, 'fat': fat, 'calorie': calorie, 'otherInfo': otherInfo},
                 success: function(response) {
+                    var data = JSON.parse(response)
+                    console.log(data)
                     document.getElementById('loading').innerHTML = "";
                     document.getElementById("recipeHead").innerHTML = "Recipe: "
-                    document.getElementById('output').innerHTML = response;
+                    document.getElementById('output').innerHTML = data.Ingredients;
                 },
                 error: function(error) {
                     console.log(error);

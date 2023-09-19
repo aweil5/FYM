@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 import openai
 from flask import Flask, render_template, request
+import json
 
 
 # added in the static_folder to allow for the css to be used
@@ -20,9 +21,9 @@ def recipeGeneration():
     calorie = request.form.get('calorie')
     otherInfo = request.form.get('otherInfo')
 
-    prompt = ". In the response begin with the recipe name, the macro nutrient count in the meal and then the ingredients to make it followed by the steps to make the recipe."
+    prompt = ". In the response begin with the recipe name, calculate the macro nutrient count in the meal and then the ingredients to make it followed by the steps to make the recipe."
 
-    prompt = prompt + """ Create a RFC8259 compliant JSON response  following this format without deviation:
+    prompt = prompt + """ Create a RFC8259 compliant JSON response following this format without deviation:
     [{
         "RecipeName": "The name of the recipe",
         "Macronutrients": "The macronutrients of this recipe",
@@ -38,7 +39,7 @@ def recipeGeneration():
     if(len(fat) != 0):
         prompt = "I want there to be " + fat  + " grams of fats." + prompt
     if(len(calorie) != 0):
-        prompt = "I want there to be " + calorie  + " calories." + prompt
+        prompt = "I want there to be around" + calorie  + " calories." + prompt
     if(len(otherInfo) != 0):
         prompt = "Along with this incorporate the following information for the meal plan: " + otherInfo + prompt
 
@@ -61,7 +62,8 @@ def recipeGeneration():
     print("Done with AI call")
     
     recipe = completion.choices[0].message.content
-    print(recipe)
+
+
     return str(recipe)
 
 
