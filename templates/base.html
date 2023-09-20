@@ -115,7 +115,15 @@
             <h3 id="loading"></h3>
             <div class="section-title">
               <h2 id = "recipeHead"></h2>
-              <p id = "output"></p>
+              <div>
+                <p id = "macronutrients"></p>
+              </div>
+              <div>
+                <p id = "ingredients"></p>
+              </div>
+              <div>
+                <p id = "steps"></p>
+              </div>
             </div>
 
 
@@ -354,8 +362,14 @@
                     var data = JSON.parse(response)
                     console.log(data)
                     document.getElementById('loading').innerHTML = "";
-                    document.getElementById("recipeHead").innerHTML = "Recipe: "
-                    document.getElementById('output').innerHTML = data.Ingredients;
+
+                    document.getElementById("recipeHead").innerHTML = "Recipe: " + data[0].RecipeName;
+                    document.getElementById('macronutrients').innerHTML = "Macronutrients: " + data[0].Macronutrients;
+                    document.getElementById('ingredients').innerHTML ="Ingredients: " + data[0].Ingredients;
+                    document.getElementById('steps').innerHTML = "Steps: " + data[0].Steps;
+
+
+
                 },
                 error: function(error) {
                     console.log(error);
